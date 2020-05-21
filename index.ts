@@ -1,7 +1,4 @@
-import {
-    IConfigurationExtend,
-    ILogger,
-} from '@rocket.chat/apps-engine/definition/accessors';
+import { IConfigurationExtend } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 
 import { JitsiSlashCommand } from './slashcommand';
