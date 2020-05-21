@@ -1,6 +1,4 @@
 {
     "params_example": "[room name (optional)]",
-    "command_description": "Generate an Jitsi video meeting URL.",
-    "server": "Server",
-    "server_description": "Jitsi server from where the slash command will generate the URLs"
+    "command_description": "Generate an Jitsi video meeting URL."
 }

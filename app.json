@@ -1,10 +1,10 @@
 {
     "id": "3b387ba9-f57c-44c6-9810-8c0256abd64c",
-    "version": "0.0.4",
+    "version": "1.0.0",
     "requiredApiVersion": "^1.1.1",
     "iconFile": "icon.png",
     "author": {
-        "name": "Rodrigo Nascimento",
+        "name": "Rocket.Chat Technologies Corp.",
         "homepage": "https://github.com/RocketChat/Apps.Jitsi",
         "support": "https://github.com/RocketChat/Apps.Jitsi"
     },
