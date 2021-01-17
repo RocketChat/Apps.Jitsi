@@ -1,0 +1,6 @@
+{
+    "params_example": "[Raum Name (optional)]",
+    "command_description": "Erzeugt eine Jitsi video URL.",
+    "jwt_label" : "JWT Token",
+    "jwt_description": "Gültiger JWT Token, der allen Videolinks hinzugefügt wird. Lassen Sie dieses Feld leer, wenn Sie keine JWT Token verwenden oder Sie keinen statischen Token an die erzeugte URL anhängen wollen!"
+}
