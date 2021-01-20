@@ -1,6 +1,6 @@
 {
     "params_example": "[room name (optional)]",
-    "command_description": "Generate an Jitsi video meeting URL.",
+    "command_description": "Generate a Jitsi video meeting URL.",
     "jwt_label" : "JWT Token",
     "jwt_description": "Valid JWT Token to add to all conference links. Keep empty if you do not use JWT or you do not want to append a token when creating the link!"
 }
