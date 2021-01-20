@@ -80,11 +80,6 @@ export class JitsiSlashCommand implements ISlashCommand {
         return value.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\s]/g, '');
     }
 
-    /**
-     * Creates the actual url to post based on the given url and room name
-     * appends a jwt token if provided
-     */
-
      /**
       * Creates the actual url to post based on the given url and room name
       * appends a jwt token if provided
