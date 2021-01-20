@@ -11,7 +11,7 @@ export class JitsiApp extends App {
             id: 'jitsi_jwt',
             type: SettingType.STRING,
             packageValue: '',
-            required: true,
+            required: false,
             public: false,
             i18nDescription: 'jwt_description',
             i18nLabel: 'jwt_label'
