@@ -9,5 +9,5 @@ This app provides a Slashcommand. Simply type `/jitsi` in any message window and
 ## Settings
 The following settings can be set via `Administration - Apps - Jitsi Slash Command`
 ### JWT Token
-When authentification via JSON Web Tokens (JWT) is enabled on your Jitsi instance, you may want to add a static token for each conference link generated to allow users to enter the conference. This token can be generated here: [jwt.io](https://jwt.io/). It is recommended so set an experiry date when creating the token. The token must not be limied to a dedicated room as the same token is added to very single conference link. 
+When authentication via JSON Web Tokens (JWT) is enabled on your Jitsi instance, you may want to add a static token for each conference link generated to allow users to enter the conference. This token can be generated here: [jwt.io](https://jwt.io/). It is recommended to set an expiration date when creating the token. The token can not be limited to a dedicated room as the same token is added to every conference link. 
 To set the JWT Token, just paste to the corresponding text box in your app settings. 
