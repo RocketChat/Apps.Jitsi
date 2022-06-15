@@ -1,17 +1,20 @@
 {
-    "compilerOptions": {
-      "target": "es2017",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "declaration": false,
-      "noImplicitAny": false,
-      "removeComments": true,
-      "strictNullChecks": true,
-      "noImplicitReturns": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-    },
-    "include": [
-      "**/*.ts"
-    ]
-  }
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"declaration": false,
+		"noImplicitAny": false,
+		"removeComments": true,
+		"strictNullChecks": true,
+		"noImplicitReturns": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"importsNotUsedAsValues": "error"
+	},
+	"exclude": ["node_modules"],
+	"include": [
+		"**/*.ts"
+	]
+}
