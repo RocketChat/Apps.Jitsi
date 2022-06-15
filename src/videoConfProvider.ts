@@ -1,71 +1,82 @@
-import { IVideoConfProvider, IVideoConference, IVideoConferenceUser, IVideoConferenceOptions } from "@rocket.chat/apps-engine/definition/videoConfProviders";
+import type { IVideoConferenceUser } from '@rocket.chat/apps-engine/definition/videoConferences';
+import type {
+	IVideoConfProvider,
+	IVideoConferenceOptions,
+	VideoConfData,
+	VideoConfDataExtended,
+} from '@rocket.chat/apps-engine/definition/videoConfProviders';
 
 export class JitsiProvider implements IVideoConfProvider {
-    public domain: string = 'meet.jit.si';
+	public domain = 'meet.jit.si';
 
-    public titlePrefix: string = 'RocketChat';
+	public titlePrefix = 'RocketChat';
 
-    public titleSuffix: string = '';
+	public titleSuffix = '';
 
-    public idType: 'id' | 'call' | 'title' = 'call';
+	public idType: 'id' | 'call' | 'title' = 'call';
 
-    public ssl: boolean = true;
+	public ssl = true;
 
-    public chromeExtensionId: string = '';
+	public chromeExtensionId = '';
 
-    private getRoomName(call: IVideoConference): string {
-        const name = call.title || call.rid;
+	public name = 'Jitsi';
 
-        return `${this.titlePrefix}${name}${this.titleSuffix}`;
-    }
+	private getRoomName(call: VideoConfData): string {
+		const name = call.title || call.rid;
 
-    private getRoomIdentification(call: IVideoConference): string {
-        switch (this.idType) {
-            case 'id':
-                return call.rid;
-            case 'title':
-                return this.getRoomName(call);
-            default:
-                return call._id;
-        }
-    }
+		return `${this.titlePrefix}${name}${this.titleSuffix}`;
+	}
 
-    public async generateUrl(call: IVideoConference): Promise<string> {
-        // return `https://jitsi.rocket.chat/${call._id}`;
-        const protocol = this.ssl ? 'https' : 'http';
+	private getRoomIdentification(call: VideoConfData): string {
+		if (call.providerData?.roomName) {
+			return `${this.titlePrefix}${call.providerData.roomName}${this.titleSuffix}`;
+		}
 
-        const name = this.getRoomIdentification(call);
+		switch (this.idType) {
+			case 'id':
+				return call.rid;
+			case 'title':
+				return this.getRoomName(call);
+			default:
+				return call._id;
+		}
+	}
 
-        return `${protocol}://${this.domain}/${name}`;
-    }
+	public async generateUrl(call: VideoConfData): Promise<string> {
+		const protocol = this.ssl ? 'https' : 'http';
 
-    public async customizeUrl(call: IVideoConference, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
-        const configs = [`config.prejoinPageEnabled=false`, `config.requireDisplayName=false`];
+		const name = this.getRoomIdentification(call);
 
-        if (this.chromeExtensionId) {
-            configs.push(`config.desktopSharingChromeExtId="${this.chromeExtensionId}"`);
-        }
+		return `${protocol}://${this.domain}/${name}`;
+	}
 
-        if (user) {
-            configs.push(`userInfo.displayName="${user.name}"`);
-        }
+	public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
+		const configs = [`config.prejoinPageEnabled=false`, `config.requireDisplayName=false`];
 
-        if (call.type === 'videoconference') {
-            configs.push(`config.callDisplayName="${call.title || 'Video Conference'}"`);
-        } else {
-            configs.push(`config.callDisplayName="Direct Message"`);
-        }
+		if (this.chromeExtensionId) {
+			configs.push(`config.desktopSharingChromeExtId="${this.chromeExtensionId}"`);
+		}
 
-        if (options.mic !== undefined) {
-            configs.push(`config.startWithAudioMuted=${options.mic ? 'false' : 'true'}`);
-        }
-        if (options.cam !== undefined) {
-            configs.push(`config.startWithVideoMuted=${options.cam ? 'false' : 'true'}`);
-        }
+		if (user) {
+			configs.push(`userInfo.displayName="${user.name}"`);
+		}
 
-        const configHash = configs.join('&');
-        const url = `${call.url}#${configHash}`;
+		if (call.type === 'videoconference') {
+			configs.push(`config.callDisplayName="${call.title || 'Video Conference'}"`);
+		} else {
+			configs.push(`config.callDisplayName="Direct Message"`);
+		}
 
-        return url;
-    }
+		if (options.mic !== undefined) {
+			configs.push(`config.startWithAudioMuted=${options.mic ? 'false' : 'true'}`);
+		}
+		if (options.cam !== undefined) {
+			configs.push(`config.startWithVideoMuted=${options.cam ? 'false' : 'true'}`);
+		}
+
+		const configHash = configs.join('&');
+		const url = `${call.url}#${configHash}`;
+
+		return url;
+	}
 }
