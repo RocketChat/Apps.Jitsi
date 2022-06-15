@@ -11,5 +11,6 @@
     "name": "Jitsi Slash Command",
     "nameSlug": "jitsi-slash-command",
     "classFile": "index.ts",
-    "description": "Slash command to generate Jitsi links"
+    "description": "Slash command to generate Jitsi links",
+    "implements": []
 }
