@@ -35,6 +35,7 @@ export class JitsiApp extends App {
 		provider.ssl = await settings.getValueById(AppSetting.JitsiSSL);
 		provider.idType = await settings.getValueById(AppSetting.JitsiRoomIdType);
 		provider.chromeExtensionId = await settings.getValueById(AppSetting.JitsiChromeExtension);
+		provider.jwt = await settings.getValueById(AppSetting.JitsiJWT);
 
 		return true;
 	}
@@ -60,6 +61,9 @@ export class JitsiApp extends App {
 				break;
 			case AppSetting.JitsiChromeExtension:
 				provider.chromeExtensionId = setting.value;
+				break;
+			case AppSetting.JitsiJWT:
+				provider.jwt = setting.value;
 				break;
 		}
 	}

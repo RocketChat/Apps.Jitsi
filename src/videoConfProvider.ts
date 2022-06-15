@@ -21,6 +21,8 @@ export class JitsiProvider implements IVideoConfProvider {
 
 	public name = 'Jitsi';
 
+	public jwt = '';
+
 	private getRoomName(call: VideoConfData): string {
 		const name = call.title || call.rid;
 
@@ -51,7 +53,7 @@ export class JitsiProvider implements IVideoConfProvider {
 	}
 
 	public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
-		const configs = [`config.prejoinPageEnabled=false`, `config.requireDisplayName=false`];
+		const configs = [`config.requireDisplayName=false`];
 
 		if (this.chromeExtensionId) {
 			configs.push(`config.desktopSharingChromeExtId="${this.chromeExtensionId}"`);
@@ -59,12 +61,15 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		if (user) {
 			configs.push(`userInfo.displayName="${user.name}"`);
+			configs.push(`config.prejoinPageEnabled=false`);
 		}
 
 		if (call.type === 'videoconference') {
-			configs.push(`config.callDisplayName="${call.title || 'Video Conference'}"`);
+			if (call.title) {
+				configs.push(`config.callDisplayName="${call.title}"`);
+			}
 		} else {
-			configs.push(`config.callDisplayName="Direct Message"`);
+			// configs.push(`config.callDisplayName="Direct Message"`);
 		}
 
 		if (options.mic !== undefined) {
@@ -72,6 +77,10 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 		if (options.cam !== undefined) {
 			configs.push(`config.startWithVideoMuted=${options.cam ? 'false' : 'true'}`);
+		}
+
+		if (this.jwt) {
+			configs.push(`jwt=${this.jwt}`);
 		}
 
 		const configHash = configs.join('&');

@@ -7,6 +7,7 @@ export enum AppSetting {
 	JitsiRoomIdType = 'jitsi_room_id_type',
 	JitsiSSL = 'jitsi_ssl',
 	JitsiChromeExtension = 'jitsi_chrome_extension',
+	JitsiJWT = 'jitsi_jwt',
 }
 
 export const settings: Array<ISetting> = [
@@ -77,5 +78,14 @@ export const settings: Array<ISetting> = [
 		public: true,
 		i18nLabel: AppSetting.JitsiChromeExtension,
 		i18nDescription: `${AppSetting.JitsiChromeExtension}_description`,
+	},
+	{
+		id: AppSetting.JitsiJWT,
+		type: SettingType.STRING,
+		packageValue: '',
+		required: false,
+		public: false,
+		i18nLabel: AppSetting.JitsiJWT,
+		i18nDescription: `${AppSetting.JitsiJWT}_description`,
 	},
 ];

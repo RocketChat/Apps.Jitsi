@@ -15,5 +15,7 @@
 	"jitsi_ssl": "Use SSL",
 	"jitsi_ssl_description": "",
 	"jitsi_chrome_extension": "Chrome Extension Id",
-	"jitsi_chrome_extension_description": ""
+	"jitsi_chrome_extension_description": "",
+	"jitsi_jwt" : "JWT Token",
+	"jitsi_jwt_description": "Valid JWT Token which is added to all of the conference links. Keep it empty if you do not use JWT or you do not want to append a token when creating the link!"
 }
