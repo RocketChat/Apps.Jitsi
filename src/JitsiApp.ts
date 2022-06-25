@@ -36,6 +36,12 @@ export class JitsiApp extends App {
 		provider.idType = await settings.getValueById(AppSetting.JitsiRoomIdType);
 		provider.chromeExtensionId = await settings.getValueById(AppSetting.JitsiChromeExtension);
 		provider.jwt = await settings.getValueById(AppSetting.JitsiJWT);
+		provider.tokenType = await settings.getValueById(AppSetting.JitsiTokenType);
+		provider.jitsiAppId = await settings.getValueById(AppSetting.JitsiApplicationId);
+		provider.jitsiAppSecret = await settings.getValueById(AppSetting.JitsiApplicationSecret);
+		provider.limitTokenToRoom = await settings.getValueById(AppSetting.JitsiLimitTokenToRoom);
+		provider.tokenAuditor = await settings.getValueById(AppSetting.JitsiTokenAuditor);
+		provider.tokenExpiration = await settings.getValueById(AppSetting.JitsiTokenExpiration);
 
 		return true;
 	}
@@ -65,12 +71,30 @@ export class JitsiApp extends App {
 			case AppSetting.JitsiJWT:
 				provider.jwt = setting.value;
 				break;
+			case AppSetting.JitsiTokenType:
+				provider.tokenType = setting.value;
+				break;
+			case AppSetting.JitsiApplicationId:
+				provider.jitsiAppId = setting.value;
+				break;
+			case AppSetting.JitsiApplicationSecret:
+				provider.jitsiAppSecret = setting.value;
+				break;
+			case AppSetting.JitsiLimitTokenToRoom:
+				provider.limitTokenToRoom = setting.value;
+				break;
+			case AppSetting.JitsiTokenAuditor:
+				provider.tokenAuditor = setting.value;
+				break;
+			case AppSetting.JitsiTokenExpiration:
+				provider.tokenExpiration = setting.value;
+				break;
 		}
 	}
 
 	public getProvider(): JitsiProvider {
 		if (!this.provider) {
-			this.provider = new JitsiProvider();
+			this.provider = new JitsiProvider(this);
 		}
 
 		return this.provider;

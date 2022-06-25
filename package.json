@@ -1,6 +1,6 @@
 {
 	"devDependencies": {
-		"@rocket.chat/apps-engine": "1.33.0-alpha.6311",
+		"@rocket.chat/apps-engine": "1.33.0-videoconf.6379",
 		"@types/node": "14.14.6",
 		"eslint": "^5.16.0",
 		"typescript": "~4.3.4",
@@ -18,5 +18,8 @@
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix",
 		"typecheck": "tsc --noEmit --skipLibCheck"
+	},
+	"dependencies": {
+		"jsrsasign": "^10.5.24"
 	}
 }

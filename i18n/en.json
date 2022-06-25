@@ -17,5 +17,18 @@
 	"jitsi_chrome_extension": "Chrome Extension Id",
 	"jitsi_chrome_extension_description": "",
 	"jitsi_jwt" : "JWT Token",
-	"jitsi_jwt_description": "Valid JWT Token which is added to all of the conference links. Keep it empty if you do not use JWT or you do not want to append a token when creating the link!"
+	"jitsi_jwt_description": "Valid JWT Token which is added to all of the conference links. Keep it empty if you do not use JWT or you do not want to append a token when creating the link!",
+	"jitsi_token_type": "Authentication",
+	"jitsi_token_type_none": "None",
+	"jitsi_token_type_static": "Static Token",
+	"jitsi_token_type_generate": "Generate Token",
+	"jitsi_application_id": "Application ID",
+	"jitsi_application_id_description": "The app id to use when generating authentication tokens.",
+	"jitsi_application_secret": "Application Secret",
+	"jitsi_application_secret_description": "The app secret to use when generating authentication tokens.",
+	"jitsi_limit_token_to_room": "Limit token to room",
+	"jitsi_limit_token_to_room_description": "If enabld, generated tokens will grant access only to the intended jitsi room.",
+	"jitsi_token_auditor": "Token Auditor",
+	"jitsi_token_auditor_description": "The name of the auditor to use when generating authentication tokens.",
+	"jitsi_token_expiration": "Token Expiration"
 }
