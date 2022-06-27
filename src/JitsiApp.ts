@@ -35,8 +35,7 @@ export class JitsiApp extends App {
 		provider.ssl = await settings.getValueById(AppSetting.JitsiSSL);
 		provider.idType = await settings.getValueById(AppSetting.JitsiRoomIdType);
 		provider.chromeExtensionId = await settings.getValueById(AppSetting.JitsiChromeExtension);
-		provider.jwt = await settings.getValueById(AppSetting.JitsiJWT);
-		provider.tokenType = await settings.getValueById(AppSetting.JitsiTokenType);
+		provider.useToken = await settings.getValueById(AppSetting.JitsiAuthToken);
 		provider.jitsiAppId = await settings.getValueById(AppSetting.JitsiApplicationId);
 		provider.jitsiAppSecret = await settings.getValueById(AppSetting.JitsiApplicationSecret);
 		provider.limitTokenToRoom = await settings.getValueById(AppSetting.JitsiLimitTokenToRoom);
@@ -68,11 +67,8 @@ export class JitsiApp extends App {
 			case AppSetting.JitsiChromeExtension:
 				provider.chromeExtensionId = setting.value;
 				break;
-			case AppSetting.JitsiJWT:
-				provider.jwt = setting.value;
-				break;
-			case AppSetting.JitsiTokenType:
-				provider.tokenType = setting.value;
+			case AppSetting.JitsiAuthToken:
+				provider.useToken = setting.value;
 				break;
 			case AppSetting.JitsiApplicationId:
 				provider.jitsiAppId = setting.value;

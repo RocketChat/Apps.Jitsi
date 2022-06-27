@@ -24,9 +24,7 @@ export class JitsiProvider implements IVideoConfProvider {
 
 	public name = 'Jitsi';
 
-	public jwt = '';
-
-	public tokenType = 'none';
+	public useToken = false;
 
 	public jitsiAppId = '';
 
@@ -51,7 +49,7 @@ export class JitsiProvider implements IVideoConfProvider {
 			return false;
 		}
 
-		if (this.tokenType === 'generate') {
+		if (this.useToken) {
 			return Boolean(this.jitsiAppId && this.jitsiAppSecret);
 		}
 
@@ -108,7 +106,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		const token = await this.generateToken(call, user);
 
 		// If it's not using a generated token, include extra settings openly
-		if (!token || this.tokenType === 'static') {
+		if (!token) {
 			if (user) {
 				configs.push(`userInfo.displayName="${user.name}"`);
 			}
@@ -116,7 +114,6 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		if (user) {
 			configs.push(`config.prejoinPageEnabled=false`);
-			configs.push(`config.requireDisplayName=false`);
 		}
 
 		const configHash = configs.join('&');
@@ -127,11 +124,7 @@ export class JitsiProvider implements IVideoConfProvider {
 	}
 
 	private async generateToken(call: VideoConfDataExtended, user: IVideoConferenceUser): Promise<string> {
-		if (this.tokenType === 'static') {
-			return this.jwt;
-		}
-
-		if (this.tokenType !== 'generate') {
+		if (!this.useToken) {
 			return '';
 		}
 
