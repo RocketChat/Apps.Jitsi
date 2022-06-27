@@ -114,6 +114,7 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		if (user) {
 			configs.push(`config.prejoinPageEnabled=false`);
+			configs.push(`config.prejoinConfig.enabled=false`);
 		}
 
 		const configHash = configs.join('&');
