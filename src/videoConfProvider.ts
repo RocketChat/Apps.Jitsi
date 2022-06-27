@@ -150,8 +150,9 @@ export class JitsiProvider implements IVideoConfProvider {
 				? {
 						user: {
 							name: user.name,
-							id: user._id,
+							// id: user._id,
 							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
+							email: `${user._id}@rocket.chat`,
 						},
 				  }
 				: '',
