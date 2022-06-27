@@ -119,7 +119,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 
 		const configHash = configs.join('&');
-		const url = `${call.url}#${configHash}`;
+		const url = `${call.url}?${configHash}`;
 
 		return url;
 	}
