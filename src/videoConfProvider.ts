@@ -106,20 +106,22 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 
 		const token = await this.generateToken(call, user);
-		if (token) {
-			configs.push(`jwt=${token}`);
-		}
 
 		// If it's not using a generated token, include extra settings openly
 		if (!token || this.tokenType === 'static') {
 			if (user) {
 				configs.push(`userInfo.displayName="${user.name}"`);
-				configs.push(`config.prejoinPageEnabled=false`);
 			}
 		}
 
+		if (user) {
+			configs.push(`config.prejoinPageEnabled=false`);
+			configs.push(`config.requireDisplayName=false`);
+		}
+
 		const configHash = configs.join('&');
-		const url = `${call.url}?${configHash}`;
+		const tokenParam = token ? `?jwt=${token}` : '';
+		const url = `${call.url}${tokenParam}#${configHash}`;
 
 		return url;
 	}
