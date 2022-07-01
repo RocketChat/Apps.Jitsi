@@ -64,7 +64,7 @@ export class JitsiSlashCommand implements ISlashCommand {
 
 		creator.finish(builder);
 
-		// modify.getUpdater().getServerSettingUpdater().incrementValue('Jitsi_Start_SlashCommands_Count');
+		// this.app.getAccessors().environmentWriter.getServerSettings().incrementValue('Jitsi_Start_SlashCommands_Count');
 	}
 
 	private async sendMessage(context: SlashCommandContext, modify: IModify, text: string): Promise<void> {

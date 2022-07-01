@@ -16,8 +16,6 @@ export class JitsiProvider implements IVideoConfProvider {
 
 	public titleSuffix = '';
 
-	public idType: 'id' | 'call' | 'title' = 'call';
-
 	public ssl = true;
 
 	public chromeExtensionId = '';
@@ -56,25 +54,10 @@ export class JitsiProvider implements IVideoConfProvider {
 		return true;
 	}
 
-	private getRoomName(call: VideoConfData): string {
-		const name = call.title || call.rid;
+	private getRoomIdentification(call: VideoConfData): string {
+		const name = call.providerData?.roomName || call._id;
 
 		return `${this.titlePrefix}${name}${this.titleSuffix}`;
-	}
-
-	private getRoomIdentification(call: VideoConfData): string {
-		if (call.providerData?.roomName) {
-			return `${this.titlePrefix}${call.providerData.roomName}${this.titleSuffix}`;
-		}
-
-		switch (this.idType) {
-			case 'id':
-				return call.rid;
-			case 'title':
-				return this.getRoomName(call);
-			default:
-				return call._id;
-		}
 	}
 
 	public async generateUrl(call: VideoConfData): Promise<string> {
@@ -92,8 +75,10 @@ export class JitsiProvider implements IVideoConfProvider {
 			configs.push(`config.desktopSharingChromeExtId="${this.chromeExtensionId}"`);
 		}
 
-		if (call.type === 'videoconference' && call.title) {
-			configs.push(`config.callDisplayName="${call.title}"`);
+		const title = call.providerData?.customCallTitle || call.title;
+
+		if (title) {
+			configs.push(`config.callDisplayName="${title}"`);
 		}
 
 		if (options.mic !== undefined) {
@@ -146,15 +131,14 @@ export class JitsiProvider implements IVideoConfProvider {
 				? {
 						user: {
 							name: user.name,
-							// id: user._id,
 							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
-							email: `${user._id}@rocket.chat`,
+							email: `user_${user._id}@rocket.chat`,
 						},
 				  }
 				: '',
 		};
 
-		if (user._id === call.createdBy._id) {
+		if (user && user._id === call.createdBy._id) {
 			payload.moderator = true;
 		}
 

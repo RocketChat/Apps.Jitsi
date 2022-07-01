@@ -4,7 +4,6 @@ export enum AppSetting {
 	JitsiDomain = 'jitsi_domain',
 	JitsiTitlePrefix = 'jitsi_title_prefix',
 	JitsiTitleSuffix = 'jitsi_title_suffix',
-	JitsiRoomIdType = 'jitsi_room_id_type',
 	JitsiSSL = 'jitsi_ssl',
 	JitsiChromeExtension = 'jitsi_chrome_extension',
 	JitsiAuthToken = 'jitsi_auth_token',
@@ -42,29 +41,6 @@ export const settings: Array<ISetting> = [
 		public: true,
 		i18nLabel: AppSetting.JitsiTitleSuffix,
 		i18nDescription: `${AppSetting.JitsiTitleSuffix}_description`,
-	},
-	{
-		id: AppSetting.JitsiRoomIdType,
-		type: SettingType.SELECT,
-		packageValue: 'call',
-		required: false,
-		public: true,
-		i18nLabel: AppSetting.JitsiRoomIdType,
-		i18nDescription: `${AppSetting.JitsiRoomIdType}_description`,
-		values: [
-			{
-				key: 'id',
-				i18nLabel: `${AppSetting.JitsiRoomIdType}_id`,
-			},
-			{
-				key: 'call',
-				i18nLabel: `${AppSetting.JitsiRoomIdType}_call`,
-			},
-			{
-				key: 'title',
-				i18nLabel: `${AppSetting.JitsiRoomIdType}_title`,
-			},
-		],
 	},
 	{
 		id: AppSetting.JitsiSSL,
