@@ -1,4 +1,26 @@
 {
-    "params_example": "[room name (optional)]",
-    "command_description": "Generate an Jitsi video meeting URL."
+	"params_example": "[room name (optional)]",
+	"command_description": "Generate a Jitsi conference call.",
+	"jitsi_domain": "Domain",
+	"jitsi_domain_description": "",
+	"jitsi_title_prefix": "Title prefix",
+	"jitsi_title_prefix_description": "Text added before the title when identifying a conference call.",
+	"jitsi_title_suffix": "Title suffix",
+	"jitsi_title_suffix_description": "Text added after the title when identifying a conference call.",
+	"jitsi_ssl": "Use SSL",
+	"jitsi_ssl_description": "",
+	"jitsi_chrome_extension": "Chrome Extension Id",
+	"jitsi_chrome_extension_description": "",
+	"jitsi_auth_token": "Use Authentication Token",
+	"jitsi_auth_token_description": "When enabled, Rocket.Chat will generate a JWT token using the settings below.",
+	"jitsi_application_id": "Application ID",
+	"jitsi_application_id_description": "The app id to use when generating authentication tokens.",
+	"jitsi_application_secret": "Application Secret",
+	"jitsi_application_secret_description": "The app secret to use when generating authentication tokens.",
+	"jitsi_limit_token_to_room": "Limit token to room",
+	"jitsi_limit_token_to_room_description": "If enabled, generated tokens will grant access only to the intended jitsi room.",
+	"jitsi_token_auditor": "Token Auditor",
+	"jitsi_token_auditor_description": "The name of the auditor to use when generating authentication tokens.",
+	"jitsi_token_expiration": "Token Expiration",
+	"jitsi_token_expiration_description": ""
 }

@@ -1,0 +1,4 @@
+{
+	"params_example": "[Raum Name (optional)]",
+	"command_description": "Erzeugt eine Jitsi video URL."
+}
