@@ -78,7 +78,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		const title = call.providerData?.customCallTitle || call.title;
 
 		if (title) {
-			configs.push(`config.callDisplayName="${title}"`);
+			configs.push(`config.callDisplayName="${encodeURIComponent(title)}"`);
 		}
 
 		if (options.mic !== undefined) {
@@ -93,7 +93,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		// If it's not using a generated token, include extra settings openly
 		if (!token) {
 			if (user) {
-				configs.push(`userInfo.displayName="${user.name}"`);
+				configs.push(`userInfo.displayName="${encodeURIComponent(user.name)}"`);
 			}
 		}
 
