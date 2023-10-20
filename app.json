@@ -1,12 +1,12 @@
 {
     "id": "3b387ba9-f57c-44c6-9810-8c0256abd64c",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "requiredApiVersion": "^1.33.0",
     "iconFile": "icon.png",
     "author": {
         "name": "Rocket.Chat Technologies Corp.",
         "homepage": "https://github.com/RocketChat/Rocket.Chat",
-        "support": "https://github.com/RocketChat/Rocket.Chat"
+        "support": "support@rocket.chat"
     },
     "name": "Jitsi",
     "nameSlug": "jitsi",
