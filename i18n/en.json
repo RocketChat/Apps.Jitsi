@@ -22,5 +22,11 @@
 	"jitsi_token_auditor": "Token Auditor",
 	"jitsi_token_auditor_description": "The name of the auditor to use when generating authentication tokens.",
 	"jitsi_token_expiration": "Token Expiration",
-	"jitsi_token_expiration_description": ""
+	"jitsi_token_expiration_description": "",
+	"jitsi_use_jaas": "Use JaaS (8x8)",
+	"jitsi_use_jaas_description": "Provided url is obtained from a JaaS provider like 8x8 (8x8.vc)",
+	"jitsi_api_key_id": "8x8 API key id",
+	"jitsi_api_key_id_description": "",
+	"jitsi_jaas_private_key": "The private key you downloaded in BASE64 encoded format",
+	"jitsi_jaas_private_key_description": "Must be in base64 format to preserve the format, use `base64 -i <.pk file>` to get the base64 string"
 }

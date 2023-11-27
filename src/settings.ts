@@ -12,6 +12,9 @@ export enum AppSetting {
 	JitsiLimitTokenToRoom = 'jitsi_limit_token_to_room',
 	JitsiTokenAuditor = 'jitsi_token_auditor',
 	JitsiTokenExpiration = 'jitsi_token_expiration',
+	UseJaaS = 'jitsi_use_jaas',
+	JaaSApiKeyId = 'jaas_api_key_id',
+	JaaSPrivateKey = 'jitsi_jaas_private_key',
 }
 
 export const settings: Array<ISetting> = [
@@ -86,6 +89,33 @@ export const settings: Array<ISetting> = [
 		public: false,
 		i18nLabel: AppSetting.JitsiApplicationSecret,
 		i18nDescription: `${AppSetting.JitsiApplicationSecret}_description`,
+	},
+	{
+		id: AppSetting.UseJaaS,
+		type: SettingType.BOOLEAN,
+		packageValue: false,
+		required: false,
+		public: false,
+		i18nLabel: AppSetting.UseJaaS,
+		i18nDescription: `${AppSetting.UseJaaS}_description`,
+	},
+	{
+		id: AppSetting.JaaSPrivateKey,
+		type: SettingType.STRING,
+		packageValue: '',
+		required: false,
+		public: false,
+		i18nLabel: AppSetting.JaaSPrivateKey,
+		i18nDescription: `${AppSetting.JaaSPrivateKey}_description`,
+	},
+	{
+		id: AppSetting.JaaSApiKeyId,
+		type: SettingType.STRING,
+		packageValue: '',
+		required: false,
+		public: false,
+		i18nLabel: AppSetting.JaaSApiKeyId,
+		i18nDescription: `${AppSetting.JaaSApiKeyId}_description`,
 	},
 	{
 		id: AppSetting.JitsiLimitTokenToRoom,
