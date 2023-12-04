@@ -71,7 +71,8 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		const name = this.getRoomIdentification(call);
 
-		return `${protocol}://${this.domain}/${this.useJaaS ? this.jitsiAppId : ''}/${name}`;
+		const appSuffix = this.useJaaS ? `/${this.jitsiAppId}` : '';
+		return `${protocol}://${this.domain}${appSuffix}/${name}`;
 	}
 
 	public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
