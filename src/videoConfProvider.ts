@@ -149,14 +149,24 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 
 		if (this.useJaaS) {
-			Object.assign(header, { kid: this.jaasApiKey, alg: 'RS256' });
+			const jaasHeader = {
+				...header,
+				kid: this.jaasApiKey,
+				alg: 'RS256',
+			};
 
-			payload.iss = 'chat';
-			payload.sub = this.jitsiAppId;
-			payload.aud = 'jitsi';
-			payload.context.features = {};
+			const jaasPayload = {
+				...payload,
+				iss: 'chat',
+				sub: this.jitsiAppId,
+				aud: 'jitsi',
+				context: {
+					...(payload.context || {}),
+					features: {},
+				},
+			}
 
-			return jws.JWS.sign('RS256', JSON.stringify(header), JSON.stringify(payload), new Buffer(this.jaasPrivateKey, 'base64').toString('utf8'));
+			return jws.JWS.sign('RS256', JSON.stringify(jaasHeader), JSON.stringify(jaasPayload), new Buffer(this.jaasPrivateKey, 'base64').toString('utf8'));
 		}
 
 		const headerStr = JSON.stringify(header);
