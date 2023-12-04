@@ -54,8 +54,12 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 
 		if (this.useToken) {
+			if (this.useJaaS) {
+				return Boolean(this.jitsiAppId && this.jaasPrivateKey && this.jaasApiKey);
+			}
 			return Boolean(this.jitsiAppId && this.jitsiAppSecret);
 		}
+
 
 		return true;
 	}
