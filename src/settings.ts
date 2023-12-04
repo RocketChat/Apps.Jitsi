@@ -13,7 +13,7 @@ export enum AppSetting {
 	JitsiTokenAuditor = 'jitsi_token_auditor',
 	JitsiTokenExpiration = 'jitsi_token_expiration',
 	UseJaaS = 'jitsi_use_jaas',
-	JaaSApiKeyId = 'jaas_api_key_id',
+	JaaSApiKeyId = 'jitsi_jaas_api_key_id',
 	JaaSPrivateKey = 'jitsi_jaas_private_key',
 }
 
