@@ -1,0 +1,74 @@
+# This workflow will be responsible to pack the app (compiled and not compiled version) to be added as asset on the release
+name: Package App
+# L4-L7 - This section is the push tags trigger that will run the package job
+on:
+  workflow_dispatch:
+    push:
+      tags:
+        - '*'
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+# This is the main job that will be running in a virtual machine (ubuntu)
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      # L21-L25 This is the checkout step wich is responsible authenticate the workflow
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          ssh-key: '${{ secrets.COMMIT_KEY }}'
+      # L26-L31 This will set all properties from the app.json to github action env variables
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: 'app.json'
+          prefix: app
+      # L33-L36 Setup the nodejs version
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '12'
+      # L40-L41 Install the dependencies
+      - name: Install dependencies
+        run: npm i
+      # L43-L44 Install the apps cli
+      - name: Install Rocket.Chat Apps cli
+        run: npm i -g @rocket.chat/apps-cli
+      # L46-L47 Pack the app (compiled)
+      - name: Bundle App Compiled
+        run: rc-apps package
+      # L49-L50 Renames the pack (compiled)
+      - name: Renaming Package Name
+        run: cd dist && mv ${{ env.app_nameSlug }}_${{ env.app_version }}.zip ${{ env.app_nameSlug }}_${{ env.app_version }}-compiled.zip
+      # L52-L53 Pack the app (not compiled)
+      - name: Bundle App Not Compiled
+        run: rc-apps package --no-compile
+      # L55-L56 Renames the pack (not compiled)
+      - name: Renaming Not Compiled Package Name
+        run: cd dist && mv ${{ env.app_nameSlug }}_${{ env.app_version }}.zip ${{ env.app_nameSlug }}_${{ env.app_version }}-not-compiled.zip
+      # L58-L76 Uploads both compiled and not compiled files inside the release
+      - name: Upload Jitsi Compiled
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/${{ env.app_nameSlug}}_${{ env.app_version }}-compiled.zip
+          asset_name: ${{ env.app_nameSlug}}_${{ env.app_version }}-compiled.zip
+          tag: ${{ env.app_version }}
+          overwrite: true
+          body: ${{ github.event.release.body }}
+
+      - name: Upload Jitsi Not Compiled
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/${{ env.app_nameSlug }}_${{ env.app_version }}-not-compiled.zip
+          asset_name: ${{ env.app_nameSlug }}_${{ env.app_version }}-not-compiled.zip
+          tag: ${{ env.app_version }}
+          overwrite: true
+          body: ${{ github.event.release.body }}

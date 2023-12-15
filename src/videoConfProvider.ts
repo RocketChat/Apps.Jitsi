@@ -83,13 +83,13 @@ export class JitsiProvider implements IVideoConfProvider {
 		const configs: string[] = [];
 
 		if (this.chromeExtensionId) {
-			configs.push(`config.desktopSharingChromeExtId="${this.chromeExtensionId}"`);
+			configs.push(`config.desktopSharingChromeExtId=${encodeURIComponent(`"${this.chromeExtensionId}"`)}`);
 		}
 
 		const title = call.providerData?.customCallTitle || call.title;
 
 		if (title) {
-			configs.push(`config.callDisplayName="${encodeURIComponent(title)}"`);
+			configs.push(`config.callDisplayName=${encodeURIComponent(`"${title}"`)}`);
 		}
 
 		if (options.mic !== undefined) {
@@ -104,7 +104,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		// If it's not using a generated token, include extra settings openly
 		if (!token) {
 			if (user) {
-				configs.push(`userInfo.displayName="${encodeURIComponent(user.name)}"`);
+				configs.push(`userInfo.displayName=${encodeURIComponent(`"${user.name}"`)}`);
 			}
 		}
 
