@@ -46,7 +46,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		title: true,
 	};
 
-	constructor(private readonly app: JitsiApp) { }
+	constructor(private readonly app: JitsiApp) {}
 
 	public async isFullyConfigured(): Promise<boolean> {
 		if (!this.domain) {
@@ -59,7 +59,6 @@ export class JitsiProvider implements IVideoConfProvider {
 			}
 			return Boolean(this.jitsiAppId && this.jitsiAppSecret);
 		}
-
 
 		return true;
 	}
@@ -140,12 +139,12 @@ export class JitsiProvider implements IVideoConfProvider {
 			room: this.limitTokenToRoom ? this.getRoomIdentification(call) : '*',
 			context: user
 				? {
-					user: {
-						name: user.name,
-						avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
-						email: `user_${user._id}@rocket.chat`,
-					},
-				}
+						user: {
+							name: user.name,
+							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
+							email: `user_${user._id}@rocket.chat`,
+						},
+				  }
 				: '',
 		};
 
@@ -169,9 +168,14 @@ export class JitsiProvider implements IVideoConfProvider {
 					...(payload.context || {}),
 					features: {},
 				},
-			}
+			};
 
-			return jws.JWS.sign('RS256', JSON.stringify(jaasHeader), JSON.stringify(jaasPayload), new Buffer(this.jaasPrivateKey, 'base64').toString('utf8'));
+			return jws.JWS.sign(
+				'RS256',
+				JSON.stringify(jaasHeader),
+				JSON.stringify(jaasPayload),
+				new Buffer(this.jaasPrivateKey, 'base64').toString('utf8'),
+			);
 		}
 
 		const headerStr = JSON.stringify(header);

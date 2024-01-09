@@ -7,7 +7,6 @@ import type {
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import type { ISetting } from '@rocket.chat/apps-engine/definition/settings';
-import type { ISettingUpdateContext } from '@rocket.chat/apps-engine/definition/settings/ISettingUpdateContext';
 
 import { AppSetting, settings } from './settings';
 import { JitsiSlashCommand } from './slashCommand';
