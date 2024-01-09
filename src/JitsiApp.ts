@@ -48,15 +48,6 @@ export class JitsiApp extends App {
 		return true;
 	}
 
-	async onPreSettingUpdate(context: ISettingUpdateContext, configurationModify: IConfigurationModify, read: IRead, http: IHttp): Promise<ISetting> {
-		if (context.newSetting.id === AppSetting.JitsiTokenAuditor) {
-			if (this.getProvider()?.useJaaS) {
-				context.newSetting.value = 'jitsi';
-			}
-		}
-		return context.newSetting;
-	}
-
 	public async onSettingUpdated(setting: ISetting, _configModify: IConfigurationModify, _read: IRead, _http: IHttp): Promise<void> {
 		const provider = this.getProvider();
 
