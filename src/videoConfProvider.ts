@@ -34,13 +34,19 @@ export class JitsiProvider implements IVideoConfProvider {
 
 	public tokenExpiration = '';
 
+	public useJaaS = false;
+
+	public jaasApiKey = '';
+
+	public jaasPrivateKey = '';
+
 	public capabilities = {
 		mic: true,
 		cam: true,
 		title: true,
 	};
 
-	constructor(private readonly app: JitsiApp) {}
+	constructor(private readonly app: JitsiApp) { }
 
 	public async isFullyConfigured(): Promise<boolean> {
 		if (!this.domain) {
@@ -48,8 +54,12 @@ export class JitsiProvider implements IVideoConfProvider {
 		}
 
 		if (this.useToken) {
+			if (this.useJaaS) {
+				return Boolean(this.jitsiAppId && this.jaasPrivateKey && this.jaasApiKey);
+			}
 			return Boolean(this.jitsiAppId && this.jitsiAppSecret);
 		}
+
 
 		return true;
 	}
@@ -65,7 +75,8 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		const name = this.getRoomIdentification(call);
 
-		return `${protocol}://${this.domain}/${name}`;
+		const appSuffix = this.useJaaS ? `/${this.jitsiAppId}` : '';
+		return `${protocol}://${this.domain}${appSuffix}/${name}`;
 	}
 
 	public async customizeUrl(call: VideoConfDataExtended, user: IVideoConferenceUser, options: IVideoConferenceOptions): Promise<string> {
@@ -129,17 +140,38 @@ export class JitsiProvider implements IVideoConfProvider {
 			room: this.limitTokenToRoom ? this.getRoomIdentification(call) : '*',
 			context: user
 				? {
-						user: {
-							name: user.name,
-							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
-							email: `user_${user._id}@rocket.chat`,
-						},
-				  }
+					user: {
+						name: user.name,
+						avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
+						email: `user_${user._id}@rocket.chat`,
+					},
+				}
 				: '',
 		};
 
 		if (user && user._id === call.createdBy._id) {
 			payload.moderator = true;
+		}
+
+		if (this.useJaaS) {
+			const jaasHeader = {
+				...header,
+				kid: this.jaasApiKey,
+				alg: 'RS256',
+			};
+
+			const jaasPayload = {
+				...payload,
+				iss: 'chat',
+				sub: this.jitsiAppId,
+				aud: 'jitsi',
+				context: {
+					...(payload.context || {}),
+					features: {},
+				},
+			}
+
+			return jws.JWS.sign('RS256', JSON.stringify(jaasHeader), JSON.stringify(jaasPayload), new Buffer(this.jaasPrivateKey, 'base64').toString('utf8'));
 		}
 
 		const headerStr = JSON.stringify(header);
