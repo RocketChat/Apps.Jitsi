@@ -7,7 +7,6 @@ import type {
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import type { ISetting } from '@rocket.chat/apps-engine/definition/settings';
-import type { ISettingUpdateContext } from '@rocket.chat/apps-engine/definition/settings/ISettingUpdateContext';
 
 import { AppSetting, settings } from './settings';
 import { JitsiSlashCommand } from './slashCommand';
@@ -41,9 +40,6 @@ export class JitsiApp extends App {
 		provider.limitTokenToRoom = await settings.getValueById(AppSetting.JitsiLimitTokenToRoom);
 		provider.tokenAuditor = await settings.getValueById(AppSetting.JitsiTokenAuditor);
 		provider.tokenExpiration = await settings.getValueById(AppSetting.JitsiTokenExpiration);
-		provider.useJaaS = await settings.getValueById(AppSetting.UseJaaS);
-		provider.jaasPrivateKey = await settings.getValueById(AppSetting.JaaSPrivateKey);
-		provider.jaasApiKey = await settings.getValueById(AppSetting.JitsiApplicationId);
 
 		return true;
 	}
@@ -84,15 +80,6 @@ export class JitsiApp extends App {
 				break;
 			case AppSetting.JitsiTokenExpiration:
 				provider.tokenExpiration = setting.value;
-				break;
-			case AppSetting.UseJaaS:
-				provider.useJaaS = setting.value;
-				break;
-			case AppSetting.JaaSApiKeyId:
-				provider.useJaaS = setting.value;
-				break;
-			case AppSetting.JaaSPrivateKey:
-				provider.useJaaS = setting.value;
 				break;
 		}
 	}
