@@ -143,12 +143,13 @@ export class JitsiProvider implements IVideoConfProvider {
 							name: user.name,
 							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
 							email: `user_${user._id}@rocket.chat`,
+							...(this.useJaaS && { moderator: user?._id === call.createdBy._id }),
 						},
 				  }
 				: '',
 		};
 
-		if (user && user._id === call.createdBy._id) {
+		if (user && user._id === call.createdBy._id && !this.useJaaS) {
 			payload.moderator = true;
 		}
 
