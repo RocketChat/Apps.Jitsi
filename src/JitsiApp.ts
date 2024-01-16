@@ -42,7 +42,7 @@ export class JitsiApp extends App {
 		provider.tokenExpiration = await settings.getValueById(AppSetting.JitsiTokenExpiration);
 		provider.useJaaS = await settings.getValueById(AppSetting.UseJaaS);
 		provider.jaasPrivateKey = await settings.getValueById(AppSetting.JaaSPrivateKey);
-		provider.jaasApiKey = await settings.getValueById(AppSetting.JitsiApplicationId);
+		provider.jaasApiKey = await settings.getValueById(AppSetting.JaaSApiKeyId);
 
 		return true;
 	}
