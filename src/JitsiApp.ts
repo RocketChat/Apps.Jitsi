@@ -88,10 +88,10 @@ export class JitsiApp extends App {
 				provider.useJaaS = setting.value;
 				break;
 			case AppSetting.JaaSApiKeyId:
-				provider.useJaaS = setting.value;
+				provider.jaasApiKey = setting.value;
 				break;
 			case AppSetting.JaaSPrivateKey:
-				provider.useJaaS = setting.value;
+				provider.jaasPrivateKey = setting.value;
 				break;
 		}
 	}
