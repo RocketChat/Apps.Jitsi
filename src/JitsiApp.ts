@@ -40,6 +40,9 @@ export class JitsiApp extends App {
 		provider.limitTokenToRoom = await settings.getValueById(AppSetting.JitsiLimitTokenToRoom);
 		provider.tokenAuditor = await settings.getValueById(AppSetting.JitsiTokenAuditor);
 		provider.tokenExpiration = await settings.getValueById(AppSetting.JitsiTokenExpiration);
+		provider.useJaaS = await settings.getValueById(AppSetting.UseJaaS);
+		provider.jaasPrivateKey = await settings.getValueById(AppSetting.JaaSPrivateKey);
+		provider.jaasApiKey = await settings.getValueById(AppSetting.JaaSApiKeyId);
 
 		return true;
 	}
@@ -80,6 +83,15 @@ export class JitsiApp extends App {
 				break;
 			case AppSetting.JitsiTokenExpiration:
 				provider.tokenExpiration = setting.value;
+				break;
+			case AppSetting.UseJaaS:
+				provider.useJaaS = setting.value;
+				break;
+			case AppSetting.JaaSApiKeyId:
+				provider.jaasApiKey = setting.value;
+				break;
+			case AppSetting.JaaSPrivateKey:
+				provider.jaasPrivateKey = setting.value;
 				break;
 		}
 	}
