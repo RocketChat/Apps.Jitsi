@@ -30,6 +30,8 @@ export class JitsiProvider implements IVideoConfProvider {
 
 	public limitTokenToRoom = false;
 
+	public bypassLobby = false;
+
 	public tokenAuditor = '';
 
 	public tokenExpiration = '';
@@ -114,9 +116,8 @@ export class JitsiProvider implements IVideoConfProvider {
 
 		const configHash = configs.join('&');
 		const tokenParam = token ? `?jwt=${token}` : '';
-		const url = `${call.url}${tokenParam}#${configHash}`;
 
-		return url;
+		return `${call.url}${tokenParam}#${configHash}`;
 	}
 
 	private async generateToken(call: VideoConfDataExtended, user: IVideoConferenceUser): Promise<string> {
@@ -143,6 +144,8 @@ export class JitsiProvider implements IVideoConfProvider {
 							name: user.name,
 							avatar: await this.getAbsoluteUrl(`avatar/${user.username}`),
 							email: `user_${user._id}@rocket.chat`,
+							// eslint-disable-next-line @typescript-eslint/camelcase
+							lobby_bypass: this.bypassLobby,
 							...(this.useJaaS && { moderator: user?._id === call.createdBy._id }),
 						},
 				  }

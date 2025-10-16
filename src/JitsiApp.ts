@@ -38,6 +38,7 @@ export class JitsiApp extends App {
 		provider.jitsiAppId = await settings.getValueById(AppSetting.JitsiApplicationId);
 		provider.jitsiAppSecret = await settings.getValueById(AppSetting.JitsiApplicationSecret);
 		provider.limitTokenToRoom = await settings.getValueById(AppSetting.JitsiLimitTokenToRoom);
+		provider.bypassLobby = await settings.getValueById(AppSetting.JitsiLobbyBypass);
 		provider.tokenAuditor = await settings.getValueById(AppSetting.JitsiTokenAuditor);
 		provider.tokenExpiration = await settings.getValueById(AppSetting.JitsiTokenExpiration);
 		provider.useJaaS = await settings.getValueById(AppSetting.UseJaaS);

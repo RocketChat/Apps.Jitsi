@@ -19,6 +19,8 @@
 	"jitsi_application_secret_description": "The app secret to use when generating authentication tokens.",
 	"jitsi_limit_token_to_room": "Limit token to room",
 	"jitsi_limit_token_to_room_description": "If enabled, generated tokens will grant access only to the intended jitsi room.",
+	"jitsi_lobby_bypass": "Bypass lobby",
+	"jitsi_lobby_bypass_description": "If enabled, the generated token will bypass the room lobby. This works together with the 'token_lobby_bypass' plugin in Jitsi. See: https://github.com/jitsi-contrib/prosody-plugins/tree/main/token_lobby_bypass",
 	"jitsi_token_auditor": "Token Auditor",
 	"jitsi_token_auditor_description": "The name of the auditor to use when generating authentication tokens.",
 	"jitsi_token_expiration": "Token Expiration",

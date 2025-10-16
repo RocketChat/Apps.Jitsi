@@ -19,6 +19,8 @@
 	"jitsi_application_secret_description": "Секрет приложения для использования при генерации токенов. Должен соответствовать App Secret в настройках сервера Jitsi.",
 	"jitsi_limit_token_to_room": "Ограничить токен чатом",
 	"jitsi_limit_token_to_room_description": "Если включено, сгенерированный токен будет предоставлять доступ только к конкретному звонку Jitsi.",
+	"jitsi_lobby_bypass": "Обходить лобби",
+	"jitsi_lobby_bypass_description": "Если включено, сгенерированный токен будет обходить лобби комнаты. Это работает совместно с плагином 'token_lobby_bypass' в Jitsi. См.: https://github.com/jitsi-contrib/prosody-plugins/tree/main/token_lobby_bypass",
 	"jitsi_token_auditor": "Аудитор токена",
 	"jitsi_token_auditor_description": "Имя аудитора для использования при генерации токенов аутентификации.",
 	"jitsi_token_expiration": "Время жизни токена",

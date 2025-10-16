@@ -10,6 +10,7 @@ export enum AppSetting {
 	JitsiApplicationId = 'jitsi_application_id',
 	JitsiApplicationSecret = 'jitsi_application_secret',
 	JitsiLimitTokenToRoom = 'jitsi_limit_token_to_room',
+	JitsiLobbyBypass = 'jitsi_lobby_bypass',
 	JitsiTokenAuditor = 'jitsi_token_auditor',
 	JitsiTokenExpiration = 'jitsi_token_expiration',
 	UseJaaS = 'jitsi_use_jaas',
@@ -125,6 +126,15 @@ export const settings: Array<ISetting> = [
 		public: true,
 		i18nLabel: AppSetting.JitsiLimitTokenToRoom,
 		i18nDescription: `${AppSetting.JitsiLimitTokenToRoom}_description`,
+	},
+	{
+		id: AppSetting.JitsiLobbyBypass,
+		type: SettingType.BOOLEAN,
+		packageValue: false,
+		required: false,
+		public: true,
+		i18nLabel: AppSetting.JitsiLobbyBypass,
+		i18nDescription: `${AppSetting.JitsiLobbyBypass}_description`,
 	},
 	{
 		id: AppSetting.JitsiTokenAuditor,
