@@ -15,6 +15,8 @@ export enum AppSetting {
 	UseJaaS = 'jitsi_use_jaas',
 	JaaSApiKeyId = 'jitsi_jaas_api_key_id',
 	JaaSPrivateKey = 'jitsi_jaas_private_key',
+	JitsiHookEnabled = 'jitsi_hook_enabled',
+	JitsiHookSecret = 'jitsi_hook_secret'
 }
 
 export const settings: Array<ISetting> = [
@@ -89,6 +91,24 @@ export const settings: Array<ISetting> = [
 		public: false,
 		i18nLabel: AppSetting.JitsiApplicationSecret,
 		i18nDescription: `${AppSetting.JitsiApplicationSecret}_description`,
+	},
+	{
+		id: AppSetting.JitsiHookEnabled,
+		type: SettingType.BOOLEAN,
+		packageValue: false,
+		required: false,
+		public: true,
+		i18nLabel: AppSetting.JitsiHookEnabled,
+		i18nDescription: `${AppSetting.JitsiHookEnabled}_description`,
+	},
+	{
+		id: AppSetting.JitsiHookSecret,
+		type: SettingType.STRING,
+		packageValue: '',
+		required: false,
+		public: false,
+		i18nLabel: AppSetting.JitsiHookSecret,
+		i18nDescription: `${AppSetting.JitsiHookSecret}_description`,
 	},
 	{
 		id: AppSetting.UseJaaS,

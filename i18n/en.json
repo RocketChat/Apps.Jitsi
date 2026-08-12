@@ -28,5 +28,9 @@
 	"jitsi_jaas_api_key_id": "8x8 API key id",
 	"jitsi_jaas_api_key_id_description": "",
 	"jitsi_jaas_private_key": "The private key you downloaded in BASE64 encoded format",
-	"jitsi_jaas_private_key_description": "Must be in base64 format to preserve the format, use `base64 -i \".pk file\"` to get the base64 string"
+	"jitsi_jaas_private_key_description": "Must be in base64 format to preserve the format, use `base64 -i \".pk file\"` to get the base64 string",
+	"jitsi_hook_enabled": "Enable remote termination?",
+	"jitsi_hook_enabled_description": "Open a hook that allows Jitsi to signal when a conference has ended. To use this, you MUST own a private instance and modify your prosody configuration. This will NOT work with public Jitsi providers.",
+	"jitsi_hook_secret": "Use shared secret for jitsi events",
+	"jitsi_hook_secret_description": "Set a shared secret your prosody process will use to authenticate the event. If you leave this blank, all requests knowing the right roomID can signal a session end"
 }

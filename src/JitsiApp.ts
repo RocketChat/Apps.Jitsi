@@ -4,6 +4,8 @@ import type {
 	IEnvironmentRead,
 	IHttp,
 	IRead,
+	IModify,
+	IPersistence,
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import type { ISetting } from '@rocket.chat/apps-engine/definition/settings';
@@ -12,7 +14,13 @@ import { AppSetting, settings } from './settings';
 import { JitsiSlashCommand } from './slashCommand';
 import { JitsiProvider } from './videoConfProvider';
 
-export class JitsiApp extends App {
+import type { VideoConference } from '@rocket.chat/apps-engine/definition/videoConferences';
+
+import { ApiSecurity, ApiVisibility } from '@rocket.chat/apps-engine/definition/api';
+
+import { EventHookEndpoint } from './endpoints/EventHook';
+
+export class JitsiApp extends App { 
 	private provider: JitsiProvider | undefined;
 
 	protected async extendConfiguration(configuration: IConfigurationExtend): Promise<void> {
@@ -22,6 +30,12 @@ export class JitsiApp extends App {
 
 		const provider = this.getProvider();
 		await configuration.videoConfProviders.provideVideoConfProvider(provider);
+		
+		await configuration.api.provideApi({
+			visibility: ApiVisibility.PUBLIC,
+			security: ApiSecurity.UNSECURE,
+			endpoints: [new EventHookEndpoint(this)],
+		});
 	}
 
 	public async onEnable(environmentRead: IEnvironmentRead, _configModify: IConfigurationModify): Promise<boolean> {
@@ -43,6 +57,8 @@ export class JitsiApp extends App {
 		provider.useJaaS = await settings.getValueById(AppSetting.UseJaaS);
 		provider.jaasPrivateKey = await settings.getValueById(AppSetting.JaaSPrivateKey);
 		provider.jaasApiKey = await settings.getValueById(AppSetting.JaaSApiKeyId);
+		provider.hookEnabled = await settings.getValueById(AppSetting.JitsiHookEnabled);
+		provider.hookSecret = await settings.getValueById(AppSetting.JitsiHookSecret);
 
 		return true;
 	}
@@ -93,6 +109,12 @@ export class JitsiApp extends App {
 			case AppSetting.JaaSPrivateKey:
 				provider.jaasPrivateKey = setting.value;
 				break;
+			case AppSetting.JitsiHookEnabled:
+				provider.hookEnabled = setting.value;
+				break;
+			case AppSetting.JitsiHookSecret:
+				provider.hookSecret = setting.value;
+				break;
 		}
 	}
 
@@ -103,4 +125,5 @@ export class JitsiApp extends App {
 
 		return this.provider;
 	}
+	
 }

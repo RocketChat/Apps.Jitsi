@@ -45,6 +45,10 @@ export class JitsiProvider implements IVideoConfProvider {
 		cam: true,
 		title: true,
 	};
+	
+	public hookEnabled = false;
+	
+	public hookSecret = '';
 
 	constructor(private readonly app: JitsiApp) {}
 
@@ -73,7 +77,7 @@ export class JitsiProvider implements IVideoConfProvider {
 		const protocol = this.ssl ? 'https' : 'http';
 
 		const name = this.getRoomIdentification(call);
-
+		
 		const appSuffix = this.useJaaS ? `/${this.jitsiAppId}` : '';
 		return `${protocol}://${this.domain}${appSuffix}/${name}`;
 	}
@@ -191,4 +195,5 @@ export class JitsiProvider implements IVideoConfProvider {
 		const suffix = relativeUrl.startsWith('/') ? relativeUrl.substring(1) : relativeUrl;
 		return `${siteUrl}${separator}${suffix}`;
 	}
+	
 }

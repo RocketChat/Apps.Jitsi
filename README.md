@@ -14,3 +14,13 @@ The following settings can be set via `Administration - Apps - Jitsi Slash Comma
 ### JWT Token
 When authentication via JSON Web Tokens (JWT) is enabled on your Jitsi instance, you may want to add a static token for each conference link generated to allow users to enter the conference. This token can be generated here: [jwt.io](https://jwt.io/). It is recommended to set an expiration date when creating the token. The token can not be limited to a dedicated room as the same token is added to every conference link. 
 To set the JWT Token, just paste to the corresponding text box in your app settings. 
+
+
+
+
+## Getting 'room closed' events from Jitsi to Rocket.Chat
+To be able to make Rocket.Chat notice once a Jitsi room gets destroyed, you need to modify the Prosody instance of your Jitsi installation so it sends HTTP requests to the provided Endpoint.
+
+You need **filesystem access** for this. It will not work with cloud based installations. If you have a hosting provider, ask them to facilitiate the changes for your instance as required.
+
+An **reference example** and helpful instructions are available in the prosody folder. Feel free to improve or modify it to your content.
