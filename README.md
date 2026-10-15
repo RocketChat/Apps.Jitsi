@@ -11,6 +11,11 @@ This app provides a Slashcommand. Simply type `/jitsi` in any message window and
 ## Settings
 The following settings can be set via `Administration - Apps - Jitsi Slash Command`
 
+### Use Jitsi prejoin configuration
+`jitsi_prejoin_enabled` defaults to `true`. When enabled (or when the setting is missing), the app leaves prejoin behavior to your Jitsi server's configuration. It does not force the prejoin screen on if the server disables it.
+
+Disable this setting to skip prejoin using the existing `config.prejoinPageEnabled=false` and `config.prejoinConfig.enabled=false` URL overrides. Depending on the Jitsi version, these overrides may start the meeting without initializing microphone and camera tracks, even when the microphone is requested to start unmuted.
+
 ### JWT Token
 When authentication via JSON Web Tokens (JWT) is enabled on your Jitsi instance, you may want to add a static token for each conference link generated to allow users to enter the conference. This token can be generated here: [jwt.io](https://jwt.io/). It is recommended to set an expiration date when creating the token. The token can not be limited to a dedicated room as the same token is added to every conference link. 
 To set the JWT Token, just paste to the corresponding text box in your app settings. 

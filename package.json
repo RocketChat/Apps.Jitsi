@@ -17,6 +17,7 @@
 	"scripts": {
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix",
+		"test": "tsc --allowJs --outDir node_modules/.cache/jitsi-tests --skipLibCheck && node node_modules/.cache/jitsi-tests/test/videoConfProvider.test.js",
 		"typecheck": "tsc --noEmit --skipLibCheck"
 	},
 	"dependencies": {
