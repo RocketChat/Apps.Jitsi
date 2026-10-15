@@ -9,6 +9,8 @@
 	"jitsi_title_suffix_description": "Text added after the title when identifying a conference call.",
 	"jitsi_ssl": "Use SSL",
 	"jitsi_ssl_description": "",
+	"jitsi_prejoin_enabled": "Use Jitsi prejoin configuration",
+	"jitsi_prejoin_enabled_description": "Use Jitsi's own configuration to decide whether to show the prejoin screen. Disable to force skipping prejoin through URL overrides, which may prevent automatic microphone and camera initialization on some Jitsi versions.",
 	"jitsi_chrome_extension": "Chrome Extension Id",
 	"jitsi_chrome_extension_description": "",
 	"jitsi_auth_token": "Use Authentication Token",

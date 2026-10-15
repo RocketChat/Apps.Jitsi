@@ -5,6 +5,7 @@ export enum AppSetting {
 	JitsiTitlePrefix = 'jitsi_title_prefix',
 	JitsiTitleSuffix = 'jitsi_title_suffix',
 	JitsiSSL = 'jitsi_ssl',
+	JitsiPrejoinEnabled = 'jitsi_prejoin_enabled',
 	JitsiChromeExtension = 'jitsi_chrome_extension',
 	JitsiAuthToken = 'jitsi_auth_token',
 	JitsiApplicationId = 'jitsi_application_id',
@@ -53,6 +54,15 @@ export const settings: Array<ISetting> = [
 		public: true,
 		i18nLabel: AppSetting.JitsiSSL,
 		i18nDescription: `${AppSetting.JitsiSSL}_description`,
+	},
+	{
+		id: AppSetting.JitsiPrejoinEnabled,
+		type: SettingType.BOOLEAN,
+		packageValue: true,
+		required: false,
+		public: true,
+		i18nLabel: AppSetting.JitsiPrejoinEnabled,
+		i18nDescription: `${AppSetting.JitsiPrejoinEnabled}_description`,
 	},
 	{
 		id: AppSetting.JitsiChromeExtension,

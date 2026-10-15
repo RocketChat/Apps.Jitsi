@@ -8,6 +8,7 @@ import type {
 import { jws } from 'jsrsasign';
 
 import type { JitsiApp } from './JitsiApp';
+import { AppSetting } from './settings';
 
 export class JitsiProvider implements IVideoConfProvider {
 	public domain = 'meet.jit.si';
@@ -107,7 +108,11 @@ export class JitsiProvider implements IVideoConfProvider {
 			}
 		}
 
-		if (user) {
+		// getById allows a missing setting to default to enabled; getValueById would throw.
+		const prejoinSetting = await this.app.getAccessors().environmentReader.getSettings().getById(AppSetting.JitsiPrejoinEnabled);
+		const prejoinEnabled = (prejoinSetting?.value ?? prejoinSetting?.packageValue) !== false;
+
+		if (user && !prejoinEnabled) {
 			configs.push(`config.prejoinPageEnabled=false`);
 			configs.push(`config.prejoinConfig.enabled=false`);
 		}
